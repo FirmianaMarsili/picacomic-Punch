@@ -1,0 +1,45 @@
+name: picacgPunch
+
+on:
+
+  push:
+    branches: [ main ]    
+    paths:
+    - '**'
+    - '!.gitignore'
+    - '!README.md'
+  
+    
+    
+  schedule:
+    - cron: '2 16 * * *'
+
+
+jobs:
+
+  build:    
+  
+    runs-on: ubuntu-latest
+    
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set Time
+      run: sudo timedatectl set-timezone 'Asia/Shanghai'
+      
+    - name: .Net Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.x'
+        
+    - name: build
+      run: dotnet build -c Release
+      
+    - name: run
+      env:
+        username: ${{secrets.USERNAME}}
+        password: ${{secrets.PASSWORD}}
+      run: dotnet run -- ${username} ${password}
+     
+        
