@@ -1,2 +1,20 @@
-# picacomic-Punch
-哔咔自动签到
+# 哔咔签到
+## 使用说明
+
+1. 点击项目右上角进行fork,然后点击你项目中的Setting,找到Secrets添加一个环境变量。共需要两个,USERNAME和PASSWORD
+![image](https://github.com/FirmianaMarsili/picacomic-Punch/blob/main/asset/1.png)
+![image](https://github.com/FirmianaMarsili/picacomic-Punch/blob/main/asset/2.png)
+
+
+2. 点击你项目上方的Actions,第一次打开可能需要点击 `I understand...`,来启用actions
+
+3. commit来触发actions,不要修改`readme`和`.gitignore`,已经忽略了这两个文件。可以参考下面
+- 打开Program.cs,点击修改
+![image](https://github.com/FirmianaMarsili/picacomic-Punch/blob/main/asset/3.png)
+
+- 在末尾添加一个空格,并且进行提交
+
+![image](https://github.com/FirmianaMarsili/picacomic-Punch/blob/main/asset/4.png)
+
+
+
