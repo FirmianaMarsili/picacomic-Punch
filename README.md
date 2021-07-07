@@ -11,14 +11,17 @@
 
 
 ***
+***
 
  ![image](https://github.com/FirmianaMarsili/picacomic-Punch/blob/main/asset/1.png)
 
 
 ***
+***
 
  ![image](https://github.com/FirmianaMarsili/picacomic-Punch/blob/main/asset/2.png)
 
+***
 ***
 
 
@@ -34,9 +37,11 @@
 
 
 ***
+***
 
  ![image](https://github.com/FirmianaMarsili/picacomic-Punch/blob/main/asset/3.png)
 
+***
 ***
 
 
@@ -46,9 +51,11 @@
 
 
 ***
+***
 
  ![image](https://github.com/FirmianaMarsili/picacomic-Punch/blob/main/asset/4.png)
 
+***
 ***
 
 
@@ -56,17 +63,21 @@
 **4. 之后点开Actions查看运行日志**
 
 ***
+***
 
  ![image](https://github.com/FirmianaMarsili/picacomic-Punch/blob/main/asset/5.png)
 
+***
 ***
 
  ![image](https://github.com/FirmianaMarsili/picacomic-Punch/blob/main/asset/6.png)
  
 ***
+***
 
  ![image](https://github.com/FirmianaMarsili/picacomic-Punch/blob/main/asset/7.png)
  
+ ***
  ***
 
 
