@@ -1,53 +1,58 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using picacg;
+using picacomic;
+using picacomic.Http.Response;
 
 namespace picacomic
 {
+    struct Account
+    {
+        public string username;
+        public string password;
+    }
     class Program
     {
         static async System.Threading.Tasks.Task Main(string[] args)
-        {            
-            if (args.Length != 2)
+        {
+            if (args.Length == 0 || string.IsNullOrEmpty(args[0]))
             {
                 throw new Exception("请查看文档设置账号密码");
             }
-            string username = args[0];
-            string password = args[1];
-            string msg = await HttpWeb.SendAsync(PicacomicUrl.Login(username, password));
-            JObject jd = JObject.Parse(msg);
-            if ((int)jd["code"] == 200 && jd["data"] != null)
+            List<Account> Accounts = new List<Account>();
+            foreach (var item in args[0].Split('|'))
             {
-                Header.SetAuthorization((string)jd["data"]["token"]);
-                Log("登录成功");
-                Log("开始获取人物信息");
-                msg = await HttpWeb.SendAsync(PicacomicUrl.Profile());
-                jd = JObject.Parse(msg);
-                if ((int)jd["code"] == 200)
+                if (!string.IsNullOrEmpty(item))
                 {
-                    Log($"昵称：{(string)jd["data"]["user"]["name"]}");
-                    Log($"等级：{(string)jd["data"]["user"]["level"]}");
-                    Log($"当前经验：{(string)jd["data"]["user"]["exp"]}");
-                    if ((bool)jd["data"]["user"]["isPunched"])
+                    string[] user_pass = item.Split(',');
+                    if (user_pass.Length == 2)
                     {
-                        Log("已经签到完成");
+                        Accounts.Add(new Account
+                        {
+                            username = user_pass[0],
+                            password = user_pass[1]
+                        });
                     }
                     else
                     {
-                        Log("开始签到");
-                        msg = await HttpWeb.SendAsync(PicacomicUrl.Punch());
-                        jd = JObject.Parse(msg);
-                        if ((int)jd["code"] == 200 && jd["data"] != null)
-                        {
-                            Log("签到完成");
-                        }
+                        throw new Exception("请查看文档设置账号密码");
                     }
                 }
             }
-            else
+            for (int i = 0; i < Accounts.Count - 1; i++)
             {
-                throw new Exception("请查看文档设置账号密码");
-            }
+                try
+                {
+                    //为了输出日志规整 等待顺序执行
+                    await PunchAsync(Accounts[i].username, Accounts[i].password, i);
+                }
+                catch (Exception ex)
+                {                    
+                    Log("第{i}个账号运行错误");
+                }
+                
+            }           
         }
 
         private static void Log(object o)
@@ -55,5 +60,29 @@ namespace picacomic
             Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}]{o.ToString()}");
         }
 
+        private static async Task PunchAsync(string username,string password,int index)
+        {
+
+            Log($"开始运行第{index + 1}个账号");
+
+            Login login = await PicacomicUrl.Login(username, password);
+            Log("登录成功");
+            Header.SetAuthorization(login.Authorization);
+            Log("开始获取人物信息");
+            Profile profile = await PicacomicUrl.Profile();
+            Log($"昵称：{profile.User.Name}");
+            Log("开始签到");
+            Punch punch = await PicacomicUrl.Punch();
+            if (punch.PunchSuccess)
+            {
+                Log("签到完成");
+                Profile profile_punch = await PicacomicUrl.Profile();
+                Log($"等级：{profile_punch.User.Level}");
+                Log($"当前经验：{profile_punch.User.Exp}");
+            }
+
+            Log("=============================================");
+        }
+
     }
-} 
+}
