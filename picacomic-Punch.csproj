@@ -7,12 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="newtonsoft.json" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="picacg">
-      <HintPath>picacg.dll</HintPath>
-    </Reference>
+    <PackageReference Include="picacomic" Version="1.0.4" />
   </ItemGroup>
 
 </Project>
