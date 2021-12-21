@@ -47,7 +47,7 @@ namespace picacomic
                     //为了输出日志规整 等待顺序执行
                     await PunchAsync(Accounts[i].username, Accounts[i].password, i);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {                    
                     Log("第{i}个账号运行错误");
                 }
