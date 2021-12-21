@@ -7,7 +7,7 @@
 ## 使用说明
 
 
-**1. 点击项目右上角进行fork,然后点击你项目中的Setting,找到Secrets添加一个环境变量。共需要两个,`USERNAME`和`PASSWORD`**
+**1. 点击项目右上角进行fork,然后点击你项目中的Setting,找到Secrets添加一个环境变量。Name:`ACCOUNTS` Value:'username1,password1|username2,password2'**
 
 
 ***
@@ -85,6 +85,7 @@
 # 特别声明
 
 - **本项目依赖于Github Actions运行，不会泄露你的xp**
+- **每两个月需要手动激活Actions,在github关闭Actions之前会发邮件提醒你**
 
 # API
  [picacomic-api](https://github.com/FirmianaMarsili/picacomic-api)
