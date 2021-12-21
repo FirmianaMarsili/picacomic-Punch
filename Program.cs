@@ -40,19 +40,20 @@ namespace picacomic
                     }
                 }
             }
-            for (int i = 0; i < Accounts.Count - 1; i++)
-            {
+            for (int i = 0; i < Accounts.Count; i++)
+            {                
                 try
                 {
                     //为了输出日志规整 等待顺序执行
-                    await PunchAsync(Accounts[i].username, Accounts[i].password, i);
+                    await PunchAsync(Accounts[i].username, Accounts[i].password, i);                    
                 }
-                catch (Exception)
-                {                    
-                    Log("第{i}个账号运行错误");
+                catch (Exception ex)
+                {
+                    Log(ex);
+                    Log($"第{i + 1}个账号运行错误");
                 }
                 
-            }           
+            }
         }
 
         private static void Log(object o)
@@ -62,7 +63,7 @@ namespace picacomic
 
         private static async Task PunchAsync(string username,string password,int index)
         {
-
+            Log("=============================================");
             Log($"开始运行第{index + 1}个账号");
 
             Login login = await PicacomicUrl.Login(username, password);
@@ -79,9 +80,7 @@ namespace picacomic
                 Profile profile_punch = await PicacomicUrl.Profile();
                 Log($"等级：{profile_punch.User.Level}");
                 Log($"当前经验：{profile_punch.User.Exp}");
-            }
-
-            Log("=============================================");
+            }            
         }
 
     }
