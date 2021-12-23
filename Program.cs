@@ -80,7 +80,11 @@ namespace picacomic
                 Profile profile_punch = await PicacomicUrl.Profile();
                 Log($"等级：{profile_punch.User.Level}");
                 Log($"当前经验：{profile_punch.User.Exp}");
-            }            
+            }
+            else
+            {
+                throw new Exception("签到失败");
+            }
         }
 
     }
