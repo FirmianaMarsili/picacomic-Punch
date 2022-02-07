@@ -41,18 +41,8 @@ namespace picacomic
                 }
             }
             for (int i = 0; i < Accounts.Count; i++)
-            {                
-                try
-                {
-                    //为了输出日志规整 等待顺序执行
-                    await PunchAsync(Accounts[i].username, Accounts[i].password, i);                    
-                }
-                catch (Exception ex)
-                {
-                    Log(ex);
-                    Log($"第{i + 1}个账号运行错误");
-                }
-                
+            {
+                await PunchAsync(Accounts[i].username, Accounts[i].password, i);
             }
         }
 
