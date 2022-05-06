@@ -1,57 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using picacomic;
 using picacomic.Http.Response;
 
 namespace picacomic
 {
     struct Account
     {
-        public string username;
-        public string password;
-    }
-    class Program
-    {
-        static async System.Threading.Tasks.Task Main(string[] args)
+        public string Username;
+        public string Password;
+
+        public Account(string username, string password)
         {
-            if (args.Length == 0 || string.IsNullOrEmpty(args[0]))
+            Username = username ?? throw new ArgumentNullException(nameof(username));
+            Password = password ?? throw new ArgumentNullException(nameof(password));
+        }
+    }
+    static class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var accountsString = args[0];
+            
+            
+            if (args.Length == 0 || string.IsNullOrEmpty(accountsString))
             {
                 throw new Exception("请查看文档设置账号密码");
             }
-            List<Account> Accounts = new List<Account>();
-            foreach (var item in args[0].Split('|'))
+            
+            var rawSplit = accountsString.Split('|');
+
+            if (rawSplit.Length % 2 != 0)
             {
-                if (!string.IsNullOrEmpty(item))
-                {
-                    string[] user_pass = item.Split(',');
-                    if (user_pass.Length == 2)
-                    {
-                        Accounts.Add(new Account
-                        {
-                            username = user_pass[0],
-                            password = user_pass[1]
-                        });
-                    }
-                    else
-                    {
-                        throw new Exception("请查看文档设置账号密码");
-                    }
-                }
+                throw new Exception("账号密码不匹配");
             }
-            for (int i = 0; i < Accounts.Count; i++)
+
+            var accounts = rawSplit.Batch(2)
+                .Select(b => b.ToArray())
+                .Select(b => new Account(b[0], b[1]))
+                .ToList();
+            
+            for (int i = 0; i < accounts.Count; i++)
             {
-                await PunchAsync(Accounts[i].username, Accounts[i].password, i);
+                await PunchAsync(accounts[i].Username, accounts[i].Password, i);
             }
         }
 
         private static void Log(object o)
         {
-            Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}]{o.ToString()}");
+            Console.WriteLine($"[{DateTime.Now:HH:mm:ss}]{o}");
         }
 
-        private static async Task PunchAsync(string username,string password,int index)
+        private static async Task PunchAsync(string username, string password, int index)
         {
             Log("=============================================");
             Log($"开始运行第{index + 1}个账号");
@@ -67,15 +68,39 @@ namespace picacomic
             if (punch.PunchSuccess)
             {
                 Log("签到完成");
-                Profile profile_punch = await PicacomicUrl.Profile();
-                Log($"等级：{profile_punch.User.Level}");
-                Log($"当前经验：{profile_punch.User.Exp}");
+                Profile profilePunch = await PicacomicUrl.Profile();
+                Log($"等级：{profilePunch.User.Level}");
+                Log($"当前经验：{profilePunch.User.Exp}");
             }
             else
             {
                 throw new Exception("签到失败");
             }
         }
+        
+        private static IEnumerable<IEnumerable<TSource>> Batch<TSource>(
+            this IEnumerable<TSource> source, int size)
+        {
+            TSource[] bucket = null;
+            var count = 0;
 
+            foreach (var item in source)
+            {
+                if (bucket == null)
+                    bucket = new TSource[size];
+
+                bucket[count++] = item;
+                if (count != size)
+                    continue;
+
+                yield return bucket;
+
+                bucket = null;
+                count = 0;
+            }
+
+            if (bucket != null && count > 0)
+                yield return bucket.Take(count).ToArray();
+        }
     }
 }
