@@ -16,7 +16,7 @@ namespace picacomic
     {
         static async System.Threading.Tasks.Task Main(string[] args)
         {
-          
+          Log(args);
             for (int i = 0; i < 30; i++)
             {
                 Log(i);
