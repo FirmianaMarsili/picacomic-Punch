@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DotNet.Utilities;
 using Newtonsoft.Json.Linq;
 using picacomic;
 using picacomic.Http.Response;
@@ -16,11 +17,8 @@ namespace picacomic
     {
         static async System.Threading.Tasks.Task Main(string[] args)
         {
-          Log(args);
-            for (int i = 0; i < 30; i++)
-            {
-                Log(i);
-            }
+
+            Log(posts());
         }
 
         private static void Log(object o)
@@ -52,6 +50,17 @@ namespace picacomic
             {
                 throw new Exception("签到失败");
             }
+        }
+
+        static string posts()
+        {
+            HttpHelper hh = new HttpHelper();
+            HttpItem hi = new HttpItem();
+            hi.URL = "https://126.com";
+            hi.Allowautoredirect = true;
+            string html = hh.GetHtml(hi);
+            return html;
+
         }
 
     }
