@@ -16,33 +16,10 @@ namespace picacomic
     {
         static async System.Threading.Tasks.Task Main(string[] args)
         {
-            if (args.Length == 0 || string.IsNullOrEmpty(args[0]))
+          
+            for (int i = 0; i < 30; i++)
             {
-                throw new Exception("请查看文档设置账号密码");
-            }
-            List<Account> Accounts = new List<Account>();
-            foreach (var item in args[0].Split('|'))
-            {
-                if (!string.IsNullOrEmpty(item))
-                {
-                    string[] user_pass = item.Split(',');
-                    if (user_pass.Length == 2)
-                    {
-                        Accounts.Add(new Account
-                        {
-                            username = user_pass[0],
-                            password = user_pass[1]
-                        });
-                    }
-                    else
-                    {
-                        throw new Exception("请查看文档设置账号密码");
-                    }
-                }
-            }
-            for (int i = 0; i < Accounts.Count; i++)
-            {
-                await PunchAsync(Accounts[i].username, Accounts[i].password, i);
+                Log(i);
             }
         }
 
