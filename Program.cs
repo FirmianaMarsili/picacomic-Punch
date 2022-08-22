@@ -17,7 +17,7 @@ namespace picacomic
     {
         static async System.Threading.Tasks.Task Main(string[] args)
         {
-            Log(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            Log(Environment.CurrentDirectory);
         }
 
         private static void Log(object o)
