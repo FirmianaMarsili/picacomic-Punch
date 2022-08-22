@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using picacomic;
-using picacomic.Http.Response;
 
 namespace picacomic
 {
@@ -20,7 +17,7 @@ namespace picacomic
             Log(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             Log(Environment.CurrentDirectory);
             Log(AppDomain.CurrentDomain.BaseDirectory);
-            File.WriteAllText(@"asset/3.md", "333");
+            File.WriteAllText(@"3.md", "32222");
         }
 
         private static void Log(object o)
