@@ -24,6 +24,7 @@ namespace picacomic
         {
             
             Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}]{o.ToString()}");
+
         }
 
 
