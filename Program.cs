@@ -17,7 +17,7 @@ namespace picacomic
             Log(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             Log(Environment.CurrentDirectory);
             Log(AppDomain.CurrentDomain.BaseDirectory);
-                            using (StreamReader sr = new StreamReader("1.txt"))
+            using (StreamReader sr = new StreamReader("1.txt"))
                 {
                     string line;
                    
