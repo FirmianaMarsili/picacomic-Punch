@@ -17,7 +17,7 @@ namespace picacomic
             Log(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             Log(Environment.CurrentDirectory);
             Log(AppDomain.CurrentDomain.BaseDirectory);
-            using (StreamWriter sw = new StreamWriter(@"README.md", true))
+            using (StreamWriter sw = new StreamWriter("README.md", true))
             {
                 sw.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "\r\n");
             }
