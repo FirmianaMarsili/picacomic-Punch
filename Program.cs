@@ -20,7 +20,7 @@ namespace picacomic
             Log(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             Log(Environment.CurrentDirectory);
             Log(AppDomain.CurrentDomain.BaseDirectory);
-            
+            File.WriteAllText(@"..\..\..\1.txt", "111");
         }
 
         private static void Log(object o)
