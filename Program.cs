@@ -17,6 +17,16 @@ namespace picacomic
             Log(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             Log(Environment.CurrentDirectory);
             Log(AppDomain.CurrentDomain.BaseDirectory);
+                            using (StreamReader sr = new StreamReader("1.txt"))
+                {
+                    string line;
+                   
+                    // 从文件读取并显示行，直到文件的末尾 
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Log(line);
+                    }
+                }
             File.WriteAllText(@"README.md", "32222");
         }
 
