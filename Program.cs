@@ -17,7 +17,7 @@ namespace picacomic
             Log(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             Log(Environment.CurrentDirectory);
             Log(AppDomain.CurrentDomain.BaseDirectory);
-            File.WriteAllText(@"3.md", "32222");
+            File.WriteAllText(@"README.md", "32222");
         }
 
         private static void Log(object o)
