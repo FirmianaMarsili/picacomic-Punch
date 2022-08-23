@@ -39,5 +39,10 @@ jobs:
       env:        
         accounts: ${{secrets.ACCOUNTS}}
       run: dotnet run -- ${accounts}
-     
+           # 更新仓库
+    - name: Update repo
+      run: |
+          git add .
+          git commit -m "auto update"
+          git push -u origin main
         
