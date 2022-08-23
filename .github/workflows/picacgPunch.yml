@@ -35,6 +35,14 @@ jobs:
     - name: Build
       run: dotnet build -c Release
       
+    - name: Config git
+      run: |
+          git config --local user.email "ations@github.com"
+          git config --local user.name "github"
+          git remote set-url origin "https://${{ github.actor }}:${{ github.token }}@github.com/${{ github.repository }}"
+          git pull --rebase  
+      
+      
     - name: Run
       env:        
         accounts: ${{secrets.ACCOUNTS}}
