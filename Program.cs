@@ -12,21 +12,31 @@ namespace picacomic
     {
         static async System.Threading.Tasks.Task Main(string[] args)
         {
-            Log(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
-            Log(Environment.CurrentDirectory);
-            Log(AppDomain.CurrentDomain.BaseDirectory);
+          //  Log(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+          //  Log(Environment.CurrentDirectory);
+          //  Log(AppDomain.CurrentDomain.BaseDirectory);
             //using (StreamWriter sw = new StreamWriter("README.md", true))
             //{
             //    sw.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "\r\n");
             //}
-            File.WriteAllText(@"README.md", "9999");
+           // File.WriteAllText(@"README.md", "9999");
             using (StreamReader sr = new StreamReader("README.md"))
             {
                 string line;
 
                 while ((line = sr.ReadLine()) != null)
                 {
-                    Log(line);
+                    Console.WriteLine(line);
+                }
+            }
+
+            using (StreamReader sr = new StreamReader(@"README.md"))
+            {
+                string line;
+
+                while ((line = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(line);
                 }
             }
         }
