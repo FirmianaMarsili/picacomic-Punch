@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using picacomic.Http.Response;
-
+ 
 namespace picacomic
 {
     struct Account
