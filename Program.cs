@@ -6,6 +6,7 @@ using picacomic.Http.Response;
 
 namespace picacomic
 {
+    
     struct Account
     {
         public string Username;
