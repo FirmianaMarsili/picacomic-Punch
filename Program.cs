@@ -63,7 +63,7 @@ namespace picacomic
             Profile profile = await PicacomicUrl.Profile();
             Log($"昵称：{profile.User.Name}");
             Log("开始签到");
-            Punch punch = await PicacomicUrl.Punch();
+            Punch punch = await PicacomicUrl.Punch(); 
             if (punch.PunchSuccess)
             {
                 Log("签到完成");
