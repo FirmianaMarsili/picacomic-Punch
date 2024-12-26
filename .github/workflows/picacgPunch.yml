@@ -32,6 +32,9 @@ jobs:
       with:
         dotnet-version: '5.0.x'
         
+    - name: Install OpenSSL
+      run: sudo apt-get install libssl-dev
+      
     - name: Build
       run: dotnet build -c Release
       
