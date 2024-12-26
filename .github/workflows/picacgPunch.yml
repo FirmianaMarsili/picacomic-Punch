@@ -31,9 +31,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '6.0.x'
-        
-    - name: Install OpenSSL
-      run: sudo apt-get install libssl-dev
+
       
     - name: Build
       run: dotnet build -c Release
